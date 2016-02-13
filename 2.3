@@ -1,0 +1,16 @@
+// Eloquent JavaScript Exercise 2.3
+
+var board = "";
+var size = prompt("Enter size of the board");
+
+for(lineNumber = 1; lineNumber <= size; lineNumber++) {
+  for(lineText = 0; lineText < size; lineText++) {
+    if((lineText + lineNumber) % 2 === 1)
+      board += " ";
+    else
+      board += "#";
+  };
+  board += "\n";
+}
+
+console.log(board);
