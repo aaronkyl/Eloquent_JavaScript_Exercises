@@ -1,0 +1,29 @@
+// Eloquent JavaScript Exercise 3.3
+
+// count all Bs in a string
+// cycle through string
+// if current character = B, increase counter by 1
+
+/* function countBs(string) {
+  charCounter = 0;
+  for(i = 0; i < string.length; i++) {
+    if(string.charAt(i) === "B"){
+      charCounter++;
+    }
+  }
+  return charCounter;
+} */
+
+function countChar(string, letter) {
+  charCounter = 0;
+  for(i = 0; i < string.length; i++) {
+    if(string.charAt(i) === letter){
+      charCounter++;
+    }
+  }
+  return charCounter;
+}
+
+function countBs(string) {
+  return countChar(string, "B");
+}
