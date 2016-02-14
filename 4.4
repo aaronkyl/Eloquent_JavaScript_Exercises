@@ -1,0 +1,33 @@
+// Eloquent JavaScript Exercise 4.4
+
+/* 
+function deepEqual(value1, value2) {
+  if((typeof(value1) || typeof(value2)) !== object) {
+    return value1 == value2;
+  } else if((value1 || value2) === null) {
+    return false;
+  } else { 
+*/
+
+// I got completely lost and looked at the EJS solution. Added notes to walk myself through the logic.
+
+function deepEqual(a, b) {
+  if (a === b) return true;                               // if a and b are /exactly/ the same, value and type, return true. changing this to == returns true for deepEqual(4,"4") because of type conversion. otherwise continue with program.
+  
+  if (a == null || typeof a != "object" ||
+      b == null || typeof b != "object")                  // if a or b are null or not objects, return false.
+    return false;
+  
+  var propsInA = 0, propsInB = 0;                         // create variable to record the number of properties in the two objects
+
+  for (var prop in a)                                     // this cycles through the properties in object a (right?) and counts them by increasing propsInA
+    propsInA += 1;
+
+  for (var prop in b) {                                   // this cycles through the properties in object b and counts them one by one but also...
+    propsInB += 1;
+    if (!(prop in a) || !deepEqual(a[prop], b[prop]))     // if the current property in b is not in a or the property IS in a but the value is not the same, return false. otherwise continue looping to the next property in b
+      return false;
+  }
+
+  return propsInA == propsInB;                            // return whether the same number of properties exist in a and b. we've proven at this point that all the properties in b exist and have the same values in a, but we never checked to see if every property in a was in b, so if propsInA != propsInB the the objects are not identical
+}
