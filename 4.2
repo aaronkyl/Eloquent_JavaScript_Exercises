@@ -1,0 +1,33 @@
+// Eloquent JavaScript Exercise 4.2
+
+// not allowed to use the .reverse method
+
+/* function reverseArray(array) {
+  return revArray = array.reverse();
+} */
+
+function reverseArray(array) {
+  var revArray = [];
+  for(i = 0; i < array.length; i++) {
+    revArray[array.length - 1 - i] = array[i];
+  }
+  return revArray;
+}
+
+/* my function which didn't work (but I expected it to have issues since it was referencing itself and I knew that would cause issues with the second half of the array
+function reverseArrayInPlace(array) {
+  for(i = 0; i < array.length; i++) {
+    array[i] = array[array.length - 1 - i];
+  }
+  return array;
+} */
+
+// EJS's function
+function reverseArrayInPlace(array) {
+  for (var i = 0; i < Math.floor(array.length / 2); i++) {  // want to get array length, divide by two, and round down so that if the array is odd length the middle value is left alone. This also means that we're only dealing with the first half of the array and not cycling through the second half like my funciton did.
+    var old = array[i];                                     // storing the value of array[i] to use on the other half of the array since this value is about to be changed. This is part of what I knew my function's problem would be.
+    array[i] = array[array.length - 1 - i];                 // changing array[i] to it's counterpart in the array.
+    array[array.length - 1 - i] = old;                      // using the stored old value of array[i] to change array[i]'s counterpart in the array.
+  }
+  return array;
+}
