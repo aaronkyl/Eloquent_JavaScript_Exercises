@@ -1,0 +1,84 @@
+// Eloquent JavaScript Exercise 4.3
+
+//  Write a function arrayToList that builds up a data structure like the previous one when given [1, 2, 3] as argument
+// my function
+// after review: I made a recursive function that builds from the top down. EJS made a function that builds form the bottom up
+/* function arrayToList(array) {
+  var list;
+  for(i = 0; i < array.length; i++) {
+    list = {
+      value: array[i]
+    };
+    array.shift();
+    if(i === array.length) {
+      list.rest = null;
+    } else {
+      list.rest = arrayToList(array);
+    }
+  }
+  return list;
+} */
+
+// EJS's funtion
+function arrayToList(array) {
+  var list = null;
+  for (var i = array.length - 1; i >= 0; i--)
+    list = {value: array[i], rest: list};
+  return list;
+}
+
+// write a listToArray function that produces an array from a list.
+// My initial train of thought
+/* function listToArray(list) {
+  var array;
+  for(arrayEntry = 0; list[0].rest !== null; arrayEntry++) {
+    array[i] = list[0].value;
+    list.shift();
+  }
+} */
+
+// My function after letting myself have a quick glance at the answer
+function listToArray(list) {
+  var array = [];     // initialize a blank array variablie
+  for(var arrayEntry = list; arrayEntry; arrayEntry = arrayEntry.rest) { // create variable for the object containing the value we want to put in our array and set it to the list we're provided. for loop to continue as long as there is an object (this stops the for loop from trying to process the null rest value in the bottom object in the list.) set our arrayEntry variable to the next rest value (this is how we step down through the list's objects.)
+    array.push(arrayEntry.value); // add the value property of the current object in the list to the end of the array.
+  }
+  return array;
+}
+
+// me practicing and talking myself through the logic
+/* function listToArray(list) {
+  var array = [];
+  for(var node = list; node; node = node.rest) {
+    array.push(node.value);
+  }
+  return array;
+} */
+
+// write the helper functions prepend, which takes an element and a list and creates a new list that adds the element to the front of the input list
+function prepend(element, list) {
+  return newList = {
+    value: element,
+    rest: list};
+} // did this one all by myself without cheating #proud #toosimpletobeproudthough
+
+
+// nth function should take a list and a number and return the value at the given position on the list
+//
+/* first train of thought; doesn't work because .length on a list is useless
+function nth(list, number) {
+  for(var node = list; node.length >= number; node = node.rest) {
+    if(node.length = number)
+      return node.value;
+  }
+} */
+
+// second train of thought. added comment to help me visualize the list variable and my new function worked!
+function nth(list, number) {      // list is {value: 10, rest: {value: 20, rest: {value: 30, rest: null}}}
+  var newList = list;
+  for(i = 0; i < number; i++) {
+    if(list.rest === null) return undefined;
+    else newList = newList.rest;
+  }
+  return newList.value;
+}
